@@ -5,24 +5,11 @@ window.onload = function() {
 
 
 let dices = [];
-let pictures = {
-"pictures/pic\ \(1\).png": 2,
-"pictures/pic\ \(2\).png": 2,
-"pictures/pic\ \(3\).png": 2,
-"pictures/pic\ \(4\).png": 2,
-"pictures/pic\ \(5\).png": 2,
-"pictures/pic\ \(6\).png": 2,
-"pictures/pic\ \(7\).png": 2,
-"pictures/pic\ \(8\).png": 2,
-"pictures/pic\ \(9\).png": 2,
-"pictures/pic\ \(10\).png": 2,
-"pictures/pic\ \(11\).png": 2,
-"pictures/pic\ \(12\).png": 2,
-"pictures/pic\ \(13\).png": 2,
-"pictures/pic\ \(14\).png": 2,
-"pictures/pic\ \(15\).png": 2,
+let pictures = {};
 
-};
+for (let i = 1; i <= 15; i++) {
+   pictures[`pictures/pic (${i}).png`] = 2;
+}
 
 let current_dice = "";
 let can_click = true;
@@ -33,7 +20,7 @@ let how_much_dices;
 let already_added = 0;
 
 function ChooseCountOfDices() {
-   $("#text").append(`Выберите количество карточек для игры:`);
+   $("#text").html(`Выберите количество карточек для игры:`);
    $("#modal").css({
       fontSize: '300%',
    })
@@ -69,8 +56,7 @@ function CheckCountOfDices(element) {
 function PreparingToPlay() {
    $(".outer_cards").remove();
 
-   $("#text").html("");
-   $("#text").append(`Подготавливаем поле`);
+   $("#text").html("Подготавливаем поле");
    $("#modal").css({
       backgroundColor: "rgba(72, 89, 109, 1)",
    })
@@ -217,8 +203,7 @@ function CheckVictory() {
    if (solved_pairs == how_much_dices/2) {
       TimerEnd();
 
-      $("#text").html("");
-      $("#text").append(`Победа!\nКоличество ходов: ${step_count}`);
+      $("#text").html(`Победа!\nКоличество ходов: ${step_count}`);
       $("#modal").css({
          fontSize: '',
          backgroundColor: '',
@@ -270,9 +255,6 @@ let hours = 0;
 let timer_id;
 
 let timer = $("#timer");
-
-console.log(timer.html());
-console.log(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
 
 function updateTime() {
     seconds++;

@@ -4,39 +4,44 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <link href="style.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"> -->
+    <link href="style_vue.css" rel="stylesheet" />
 </head>
 <body>
-    <audio id="music" loop>
-        <source src="music/long_music/keys-of-moon-white-petals(chosic.com).mp3" type="audio/mp3">
-    </audio>
-    <audio id="pair" src="music/Effects/pair.mp3"></audio>
-    <div class="preload">
-        <div id="spinSquares">
-            <div class="spinSquare" id="spinSquare_1" style="animation-delay: 0.6s;"></div>
-            <div class="spinSquare" id="spinSquare_2" style="animation-delay: 0.75s;"></div>
-            <div class="spinSquare" id="spinSquare_3" style="animation-delay: 0.9s;"></div>
-            <div class="spinSquare" id="spinSquare_4" style="animation-delay: 1.05s;"></div>
-            <div class="spinSquare" id="spinSquare_5" style="animation-delay: 1.2s;"></div>
-            <div class="spinSquare" id="spinSquare_6" style="animation-delay: 1.35s;"></div>
-            <div class="spinSquare" id="spinSquare_7" style="animation-delay: 1.5s;"></div>
-            <div class="spinSquare" id="spinSquare_8" style="animation-delay: 1.65s;"></div>
+    <div id="app">
+        <audio id="music" loop>
+            <source src="music/long_music/keys-of-moon-white-petals(chosic.com).mp3" type="audio/mp3">
+        </audio>
+        <audio id="pair" src="music/effects/pair.mp3"></audio>
+        <audio id="diceClickAudio">
+            <source src="music/effects/click.mp3" type="audio/mp3">
+        </audio>
+        
+        <div class="preload" v-if="isLoading">
+            <div id="spinSquares">
+                <div class="spinSquare" v-for="n in 8" :key="n" :style="`animation-delay: ${0.6 + (n-1)*0.15}s;`"></div>
+            </div>
         </div>
+
+        <div class="card text-center" id="timer">{{ formattedTime }}</div>
+        <div id="field">
+            <div id="modal">
+                <div id="text" class="text-center">{{ modalText }}</div>
+                <button @click="reloadPage" id="restart" class="btn btn-success btn-lg">Сыграть ещё раз</button>
+            </div>
+            <div class="dices_wrapper">
+
+            </div>
+        </div>
+
+        <div id="version">Version 1.2.0</div>
+        <img id="music_on" src="svg/music_on_icon.svg" @click="toggleMusic"></img>
+        <img id="music_off" src="svg/music_off_icon.svg" @click="toggleMusic"></img>
     </div>
 
-    <div class="card text-center" id="timer">00:00:00</div>
-    <div id="field">
-        <div id="modal">
-            <div id="text" class="text-center"></div>
-        </div>
-    </div>
-
-    <div id="version">Version 1.2.0</div>
-    <span id="music_on" class="lnr lnr-volume-high"></span>
-    <span id="music_off" class="lnr lnr-volume"></span>
-
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="vue_script.js"></script>
 </body>
+</html>
